@@ -1,34 +1,28 @@
 var webpage = require('webpage');
 var page = webpage.create();
-// page.open('http://phantomjs.org/quick-start.html', function (status) {
-//  var data;
-//  if (status === 'fail') {
-//   console.log('open page fail!');
-//  } else {
-//   // console.log(page.content);//打印出HTML内容
-//   console.log(page);
-//  }
-//  page.close();//关闭网页
-//  phantom.exit();//退出phantomjs命令行
-// });
 
-// page.open('http://www.baidu.com', function(status) {
-//   console.log("Status: " + status);
-//   if(status === "success") {
-//     page.render('example.png');
-//   }
-//   phantom.exit();
-// });
+var loadUrlTime = function (startTime) {
+  // 测量加载页面花费的时间
+  var time = Date.now() - startTime;
+  console.log('加载页面耗时：' + time + ' msec');
+  return time;
+}
 
 var screenShot = function (page, name) {
   // 截图页面
-  var time = new Date().getTime();
+  // var time = new Date().getTime();
+  var time = '';
   page.render('./images/' + name + time + '.png');
 }
+
+var startTime = Date.now();
 page.open('http://www.baidu.com', function(status) {
   console.log("Status: " + status);
   if(status === "success") {
+    loadUrlTime(startTime);
     screenShot(page, 'baidu');
+  } else {
+    console.log('FAIL to load the address');
   }
   phantom.exit();
 });
