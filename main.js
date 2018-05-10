@@ -1,18 +1,12 @@
 var webpage = require('webpage');
 var page = webpage.create();
+var screenCapture = require('./libs/screenCapture');
 
 var loadUrlTime = function (startTime) {
   // 测量加载页面花费的时间
   var time = Date.now() - startTime;
   console.log('加载页面耗时：' + time + ' msec');
   return time;
-}
-
-var screenShot = function (name) {
-  // 截图页面
-  // var time = new Date().getTime();
-  var time = '';
-  page.render('./images/' + name + time + '.png');
 }
 
 var getTitle = function () {
@@ -36,11 +30,12 @@ var getTitle = function () {
 // };
 
 var startTime = Date.now();
-page.open('http://www.baidu.com', function(status) {
+page.open('https://en.wikipedia.org/w/index.php?title=Jakarta&printable=yes', function(status) {
   console.log("Status: " + status);
   if(status === "success") {
     loadUrlTime(startTime);
-    // screenShot('baidu');
+    screenCapture.captureImage('baidu');
+    screenCapture.captureFile('baidu');
     getTitle(page);
   } else {
     console.log('FAIL to load the address');
