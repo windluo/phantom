@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "phantomjs": "node_modules/.bin/phantomjs"
+  },
+  "devDependencies": {
+    "phantomjs": "^2.1.7+deprecated"
+  }
+}
