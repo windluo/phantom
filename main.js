@@ -15,12 +15,25 @@ var screenShot = function (page, name) {
   page.render('./images/' + name + time + '.png');
 }
 
+var getTitle = function (page) {
+  // 获取页面标题
+  var title = page.evaluate(function() {
+    return document.title;
+  });
+  console.log('页面title：' + title)
+}
+// onConsoleMessage可以抓取页面的console.log
+// page.onConsoleMessage = function(msg) {
+//   console.log('页面的console.log：' + msg);
+// };
+
 var startTime = Date.now();
 page.open('http://www.baidu.com', function(status) {
   console.log("Status: " + status);
   if(status === "success") {
     loadUrlTime(startTime);
-    screenShot(page, 'baidu');
+    // screenShot(page, 'baidu');
+    getTitle(page);
   } else {
     console.log('FAIL to load the address');
   }
