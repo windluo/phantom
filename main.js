@@ -1,6 +1,21 @@
 var webpage = require('webpage');
 var page = webpage.create();
-var screenCapture = require('./libs/screenCapture');
+
+var captureImage = function (name, type) {
+  // 截图
+  // var time = new Date().getTime();
+  var time = '';
+  type = type ? type : 'png';
+  page.render('./images/' + name + time + '.' + type);
+}
+
+var captureFile = function(name, type) {
+  // 只能截成pdf
+  // 截取pdf
+  var time = '';
+  type = type ? type : 'pdf';
+  page.render('./files/' + name + time + '.' + type);
+}
 
 var loadUrlTime = function (startTime) {
   // 测量加载页面花费的时间
@@ -30,12 +45,12 @@ var getTitle = function () {
 // };
 
 var startTime = Date.now();
-page.open('https://en.wikipedia.org/w/index.php?title=Jakarta&printable=yes', function(status) {
+page.open('https://www.baidu.com/', function(status) {
   console.log("Status: " + status);
   if(status === "success") {
     loadUrlTime(startTime);
-    screenCapture.captureImage('baidu');
-    screenCapture.captureFile('baidu');
+    captureImage("baidu");
+    captureFile('baidu');
     getTitle(page);
   } else {
     console.log('FAIL to load the address');
