@@ -6,6 +6,9 @@ var captureImage = function (name, type) {
   // var time = new Date().getTime();
   var time = '';
   type = type ? type : 'png';
+  // 指定截图宽高
+  page.viewportSize = { width: 600, height: 400 };
+  page.clipRect = { top: 0, left: 0, width: 600, height: 400 };
   page.render('./images/' + name + time + '.' + type);
 }
 
