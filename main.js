@@ -53,7 +53,7 @@ page.open('https://www.baidu.com/', function(status) {
   if(status === "success") {
     loadUrlTime(startTime);
     captureImage("baidu");
-    captureFile('baidu');
+    // captureFile('baidu');
     getTitle(page);
   } else {
     console.log('FAIL to load the address');
